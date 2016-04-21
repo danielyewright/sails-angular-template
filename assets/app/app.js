@@ -2,16 +2,15 @@ angular.module('app', [
 	'ui.router',
 	'adaptiveTemplating',
 	'ngSails',
-]);
+	'ui'
+]).run([ '$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
+  $rootScope.$state = $state;
+  $rootScope.$stateParams = $stateParams;
+}]);
 
 angular.module('app').config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 	$locationProvider.html5Mode(true);
 	$urlRouterProvider.otherwise('/pagenotfound');
-	$stateProvider.state('dashboard', {
-		url: '/',
-		templateUrl:'app/app.html',
-		controller:'AppController'
-	});
 });
 
 angular.module('app').config(['$sailsProvider', function($sailsProvider) {
@@ -29,3 +28,7 @@ angular.module('app').run(function (adaptiveTemplating, $window) {
 angular.module('app').controller('AppController', ['$scope', '$location', '$sails', function ($scope, $location, $sails) {
 	
 }]);
+
+angular.element(document).ready(function() {
+  angular.bootstrap(document, ['app']);
+});

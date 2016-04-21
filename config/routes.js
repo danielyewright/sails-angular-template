@@ -47,17 +47,17 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/*': function(req, res, next) {
-		if (req.path == undefined) {
-			return next();
-  		} else if (req.path.match(/\..*/g)) {
-  			return next();
-		} else if (req.path == '/__getcookie') {
-			return next();
-		} else if (req.path.match(/\/rest.*/g)) {
-			return next();
-		} else {
-			return res.sendfile(sails.config.appPath + '/assets/index.html');
-		}
+    if (req.path == undefined) {
+      return next();
+      } else if (req.path.match(/\..*/g)) {
+        return next();
+    } else if (req.path == '/__getcookie') {
+      return next();
+    } else if (req.path.match(/\/rest.*/g)) {
+      return next();
+    } else {
+      return res.view('index', {layout: false});
+    }
   }
 
 };
